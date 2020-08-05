@@ -1,6 +1,6 @@
 # GMCA Contact Tracing Case Management Solution
 
-Welcome to Greater Manchester Combined Authority's Contact Tracking Complex Case Management Solution Repository
+Welcome to Greater Manchester Combined Authority's Contact Tracking Complex Case Management Solution Repository which we have developed with www.ansgroup.co.uk using Microsoft Dynamics 365 platform and Microsoft Forms Pro
 
 This is repository provides the configuration files used for our Microsoft Dynamics 365 based solution using the Configuration Migration Tool
 

@@ -1,0 +1,58 @@
+function onLoad2(executionContext){
+    LookupContactFieldValue(executionContext);
+}
+
+//Get and Set a Lookup field value
+function LookupContactFieldValue(executionContext) 
+
+{ 
+    var formContext = executionContext.getFormContext();
+	var ContactField = formContext.getAttribute("customertypecode");
+    var tabObjIndex = formContext.ui.tabs.get("Summary_Index");
+	var tabObjSetting = formContext.ui.tabs.get("Summary_Setting");
+	var tabObjContact = formContext.ui.tabs.get("Summary_Contact");
+    
+    //Check that field exist on the form before you try to Get/Set its value
+    if (ContactField != null) 
+	
+	{
+        // Get the value of the field
+        var ContactFieldValue = ContactField.getValue();
+        //Check if the field contains a value
+        if (ContactFieldValue != null)
+		{
+            
+    var optionSelectedValue = ContactField.getSelectedOption().value
+
+			
+			if (optionSelectedValue == "1")
+				{
+				tabObjIndex.setVisible(true);	
+				tabObjSetting.setVisible(false);					
+				tabObjContact.setVisible(false);						
+				}
+		
+			else if (optionSelectedValue == "119020000")
+				{
+				tabObjIndex.setVisible(false);	
+				tabObjSetting.setVisible(true);					
+				tabObjContact.setVisible(false);
+				}
+		
+			else if (optionSelectedValue == "119020001")
+				{
+				tabObjIndex.setVisible(false);	
+				tabObjSetting.setVisible(false);					
+				tabObjContact.setVisible(true);						
+				}
+	    }
+		
+		else 
+		{
+				tabObjIndex.setVisible(true);	
+				tabObjSetting.setVisible(false);					
+				tabObjContact.setVisible(false);					
+		}
+		
+    }
+}

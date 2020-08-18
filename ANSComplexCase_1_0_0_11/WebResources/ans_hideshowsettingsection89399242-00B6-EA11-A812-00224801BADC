@@ -1,0 +1,72 @@
+function onLoad(executionContext){
+    LookupPathwayFieldValue(executionContext);
+}
+
+//Get and Set a Lookup field value
+function LookupPathwayFieldValue(executionContext) 
+
+{
+    //Get the context of the form
+    var formContext = executionContext.getFormContext();
+    //The logical name of the field of interest
+    var PathwayLogicalName = "ans_settingtypeid";
+    // Access the field on the form
+    var PathwayField = formContext.getAttribute(PathwayLogicalName);
+    //Declare the other variables as needed
+    var PathwayFieldValue;
+    var guid;
+    var name;
+    var entityName;
+	var tabObj = formContext.ui.tabs.get("tab_pathwayquestion");
+    var sectionObj1 = tabObj.sections.get("tab_pathwayquestion_section_1");
+	var sectionObj2 = tabObj.sections.get("tab_pathwayquestion_section_2");
+    var sectionObj3 = tabObj.sections.get("tab_pathwayquestion_section_3");
+
+//	tabObj.setVisible(false);;
+
+    //Check that field exist on the form before you try to Get/Set its value
+    if (PathwayField != null) 
+	
+	{
+        // Get the value of the field
+        PathwayFieldValue = PathwayField.getValue();
+        //Check if the field contains a value
+        if (PathwayFieldValue != null)
+		{
+            //To get the attributes of the field
+            Pathwayguid = PathwayFieldValue[0].id.slice(1, -1);
+            Pathwayname = PathwayFieldValue[0].name;
+            PathwayentityName = PathwayFieldValue[0].entityType;					
+       
+			if (Pathwayname == "One")
+				{
+				tabObj.setVisible(true);		
+				sectionObj1.setVisible(true);
+				sectionObj2.setVisible(false);
+				sectionObj3.setVisible(false);							
+				}
+		
+			else if (Pathwayname == "Two")
+				{
+				tabObj.setVisible(true);		
+				sectionObj1.setVisible(false);
+				sectionObj2.setVisible(true);
+				sectionObj3.setVisible(false);							
+				}
+		
+			else if (Pathwayname == "Three")
+				{
+				tabObj.setVisible(true);		
+			    sectionObj1.setVisible(false);
+				sectionObj2.setVisible(false);
+				sectionObj3.setVisible(true);						
+				}
+	    }
+		
+		else 
+		{
+				tabObj.setVisible(false);					
+		}
+		
+    }
+}

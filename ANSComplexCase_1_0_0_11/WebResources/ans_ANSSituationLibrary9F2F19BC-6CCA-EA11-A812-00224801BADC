@@ -1,0 +1,93 @@
+//The following libary is set up for the Complex Case Management
+//
+//Xrm.Page.ui.tabs.get(“tabname”).sections.get(“sectioname”).setVisible(true);
+//Xrm.Page.ui.tabs.get(“tabname”).sections.get(“sectioname”).setVisible(false);
+
+//General enquiry or setting with possible case 1
+//Setting with one confirmed case 119,020,001
+//Cluster (2 cases, setting where no evidence of transmission) 119,020,002
+//Outbreak (2 or more cases linked to time and place) 119,020,000
+
+//ComplexCaseSummary
+//InitialManagement
+//ContactTracing
+//ConsequentManagement
+
+function SectionHideOnLoad(executionContext){
+    SectionHide(executionContext);
+}
+
+//Get and Set a Lookup field value
+function SectionHide(executionContext) 
+
+{
+    //Get the context of the form
+    var formContext = executionContext.getFormContext();
+    //The logical name of the field of interest
+    var SeverityLogicalName = "severitycode";
+    // Access the field on the form
+    var SeverityField = formContext.getAttribute(SeverityLogicalName);
+    //Declare the other variables as needed
+  //  var SeverityFieldValue;
+  //  var guid;
+ //   var name;
+ //   var entityName;
+	var secObjSummaryInitial = formContext.ui.tabs.get("ComplexCaseSummary").sections.get("IMS");
+	var secObjSummaryTracing = formContext.ui.tabs.get("ComplexCaseSummary").sections.get("CT");
+	var secObjSummaryManagement = formContext.ui.tabs.get("ComplexCaseSummary").sections.get("CM");	
+	var secObjSummaryDetails = formContext.ui.tabs.get("ComplexCaseSummary").sections.get("Details");	
+	var secObjSummarySetting = formContext.ui.tabs.get("ComplexCaseSummary").sections.get("SettingDetails");
+
+
+    //Check that field exist on the form before you try to Get/Set its value
+    if (SeverityField != null) 
+	
+	{
+        // Get the value of the field
+        SeverityFieldValue = SeverityField.getValue();
+        //Check if the field contains a value
+        if (SeverityFieldValue != null)
+		{
+
+			if (SeverityFieldValue == "119020000")
+				{
+				secObjSummaryInitial.setVisible(true);	
+				secObjSummaryTracing.setVisible(false);					
+				secObjSummaryManagement.setVisible(false);	
+				secObjSummaryDetails.setVisible(false);		
+				secObjSummarySetting.setVisible(true);						
+				}	
+				
+			else if (SeverityFieldValue == "1")
+				{
+				secObjSummaryInitial.setVisible(true);	
+				secObjSummaryTracing.setVisible(false);					
+				secObjSummaryManagement.setVisible(false);	
+				secObjSummaryDetails.setVisible(true);		
+				secObjSummarySetting.setVisible(true);						
+				}	
+				
+			else 
+				{
+				secObjSummaryInitial.setVisible(true);	
+				secObjSummaryTracing.setVisible(true);					
+				secObjSummaryManagement.setVisible(true);	
+				secObjSummaryDetails.setVisible(true);		
+				secObjSummarySetting.setVisible(true);					
+				}
+		
+			
+
+	    }
+		
+		else 
+		{
+				secObjSummaryInitial.setVisible(true);	
+				secObjSummaryTracing.setVisible(true);					
+				secObjSummaryManagement.setVisible(true);	
+				secObjSummaryDetails.setVisible(true);		
+				secObjSummarySetting.setVisible(true);					
+		}
+		
+    }
+}
